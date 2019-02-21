@@ -1,0 +1,13 @@
+join-titles:
+  -
+    title: "&7&lWelcome to &a&lMinecord Network"
+    sub-title: "&f&lWe hope you'll enjoy the game!"
+    stay: 5
+  -
+    title: "&e&lThis is a title"
+    sub-title: "&a&lAnd this is subtitle (surprise!)"
+    stay: 3
+
+chat-messages:
+  # No permission required
+  default:
