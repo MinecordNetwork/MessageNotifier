@@ -10,15 +10,12 @@ import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class MessageController {
 
     private MessageNotifier messageNotifier;
-    private List<String> defaultMessages = new ArrayList<>();
+    private List<String> defaultMessages;
     private HashMap<String, List<String>> groupMessages = new HashMap<>();
     private String messagePrefix;
     private Random random = new Random();
@@ -33,6 +30,11 @@ public class MessageController {
     public void onEnable(FileConfiguration config) {
         messagePrefix = config.getString("chat-messages.prefix");
         defaultMessages = config.getStringList("chat-messages.groups.default");
+
+        List<Map<?, ?>> groups = config.getMapList("chat-messages.groups");
+        groups.forEach((entry) -> entry.forEach((key, value) -> {
+            groupMessages.put((String) key, config.getStringList("chat-messages.groups." + key));
+        }));
 
         sendChatMessage(config.getInt("chat-messages.delay"));
     }
