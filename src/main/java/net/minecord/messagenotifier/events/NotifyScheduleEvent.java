@@ -10,6 +10,10 @@ public class NotifyScheduleEvent extends Event implements Cancellable {
     private boolean isCancelled = false;
     private int nextNotifyIn;
 
+    public NotifyScheduleEvent(int nextNotifyIn) {
+        this.nextNotifyIn = nextNotifyIn;
+    }
+
     @Override
     public boolean isCancelled() {
         return isCancelled;
