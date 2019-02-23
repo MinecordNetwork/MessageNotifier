@@ -19,7 +19,6 @@ public class MessageController {
     private List<String> defaultMessages = new ArrayList<>();
     private HashMap<String, List<String>> groupMessages = new HashMap<>();
     private String messagePrefix;
-    private int messageDelay;
     private Random random = new Random();
 
     public MessageController(MessageNotifier messageNotifier) {
@@ -29,11 +28,10 @@ public class MessageController {
     }
 
     public void onEnable(FileConfiguration config) {
-        messageDelay = config.getInt("chat-messages.delay");
         messagePrefix = config.getString("chat-messages.prefix");
-        defaultMessages = config.getStringList("chat-messages.default");
+        defaultMessages = config.getStringList("chat-messages.groups.default");
 
-        sendChatMessage(messageDelay);
+        sendChatMessage(config.getInt("chat-messages.delay"));
     }
 
     private void sendChatMessage(int delay) {
