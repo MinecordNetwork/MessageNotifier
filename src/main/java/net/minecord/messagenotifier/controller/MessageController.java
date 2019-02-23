@@ -51,6 +51,10 @@ public class MessageController {
                     PlayerNotifyEvent playerNotifyEvent = new PlayerNotifyEvent(player, defaultMessage, messagePrefix);
                     Bukkit.getPluginManager().callEvent(playerNotifyEvent);
 
+                    if (playerNotifyEvent.isCancelled()) {
+                        continue;
+                    }
+
                     player.sendMessage(ChatColor.translateAlternateColorCodes('&', playerNotifyEvent.getMessage().replace("{prefix}", playerNotifyEvent.getPrefix())));
                 }
             }
