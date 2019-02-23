@@ -4,6 +4,7 @@ import net.minecord.messagenotifier.MessageNotifier;
 import net.minecord.messagenotifier.events.NotifyScheduleEvent;
 import net.minecord.messagenotifier.events.PlayerNotifyEvent;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -50,7 +51,7 @@ public class MessageController {
                     PlayerNotifyEvent playerNotifyEvent = new PlayerNotifyEvent(player, defaultMessage, messagePrefix);
                     Bukkit.getPluginManager().callEvent(playerNotifyEvent);
 
-                    player.sendMessage(playerNotifyEvent.getMessage().replace("{prefix}", playerNotifyEvent.getPrefix()));
+                    player.sendMessage(ChatColor.translateAlternateColorCodes('&', playerNotifyEvent.getMessage().replace("{prefix}", playerNotifyEvent.getPrefix())));
                 }
             }
         }.runTaskAsynchronously(messageNotifier);
