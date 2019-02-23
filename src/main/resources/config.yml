@@ -9,5 +9,8 @@ join-titles:
     stay: 3
 
 chat-messages:
+  prefix: "&e[Tip]"
+  delay: 60
+
   # No permission required
   default:
