@@ -12,5 +12,13 @@ chat-messages:
   prefix: "&e[Tip]"
   delay: 60
 
-  # No permission required
-  default:
+  # You can add your own groups, permission will be messagenotifier.group.<groupName>
+  # Player will be always receiving messages from group default and all groups if he has permissions for it
+  groups:
+    # No permission required
+    default:
+      - "{prefix} &7This is just a test &aDEFAULT &7message"
+
+    # Permission required: messagenotifier.group.hero
+    hero:
+      - "{prefix} &7This is just a test &bHERO &7message"
