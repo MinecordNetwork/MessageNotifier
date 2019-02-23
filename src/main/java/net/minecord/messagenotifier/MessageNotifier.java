@@ -38,7 +38,7 @@ public class MessageNotifier extends JavaPlugin {
         reloadConfig();
 
         messageController.onDisable();
-        messageController.onEnable();
+        messageController.onEnable(getConfig());
 
         titleController.onDisable();
         titleController.onEnable();

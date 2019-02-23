@@ -8,6 +8,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.scheduler.BukkitTask;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -21,6 +22,7 @@ public class MessageController {
     private HashMap<String, List<String>> groupMessages = new HashMap<>();
     private String messagePrefix;
     private Random random = new Random();
+    private BukkitTask currentThread;
 
     public MessageController(MessageNotifier messageNotifier) {
         this.messageNotifier = messageNotifier;
@@ -36,7 +38,7 @@ public class MessageController {
     }
 
     private void sendChatMessage(int delay) {
-        new BukkitRunnable() {
+        currentThread = new BukkitRunnable() {
             public void run() {
                 String defaultMessage = defaultMessages.get(random.nextInt(defaultMessages.size()));
 
@@ -62,6 +64,6 @@ public class MessageController {
     }
 
     public void onDisable() {
-
+        currentThread.cancel();
     }
 }
