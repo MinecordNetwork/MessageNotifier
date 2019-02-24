@@ -84,6 +84,8 @@ public class MessageController {
 
                     player.sendMessage(ChatColor.translateAlternateColorCodes('&', playerNotifyEvent.getMessage().replace("{prefix}", playerNotifyEvent.getPrefix())));
                 }
+
+                sendChatMessage(scheduleEvent.getNextNotifyIn());
             }
         }.runTaskLaterAsynchronously(messageNotifier, delay * 20);
     }
