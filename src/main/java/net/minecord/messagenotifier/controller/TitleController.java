@@ -6,6 +6,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +33,11 @@ public class TitleController {
     }
 
     public void onJoin(Player player) {
+        new BukkitRunnable() {
+            public void run() {
 
+            }
+        }.runTaskAsynchronously(messageNotifier);
     }
 
     public void onDisable() {

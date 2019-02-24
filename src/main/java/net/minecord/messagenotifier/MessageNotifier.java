@@ -3,6 +3,7 @@ package net.minecord.messagenotifier;
 import net.minecord.messagenotifier.command.ReloadCommand;
 import net.minecord.messagenotifier.controller.MessageController;
 import net.minecord.messagenotifier.controller.TitleController;
+import net.minecord.messagenotifier.listener.PlayerJoinListener;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -33,6 +34,8 @@ public class MessageNotifier extends JavaPlugin {
 
         Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', pluginPrefix + "&aPlugin successfully enabled!"));
         Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', pluginPrefix + "Author: &eRixafy &a[https://rixafy.pro]"));
+
+        Bukkit.getPluginManager().registerEvents(new PlayerJoinListener(this), this);
     }
 
     public void onReload() {
