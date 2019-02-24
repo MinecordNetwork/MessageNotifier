@@ -3,6 +3,7 @@ package net.minecord.messagenotifier.controller;
 import net.minecord.messagenotifier.MessageNotifier;
 import net.minecord.messagenotifier.events.NotifyScheduleEvent;
 import net.minecord.messagenotifier.events.ChatMessageSendEvent;
+import net.minecord.messagenotifier.util.PlaceholderUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -71,10 +72,10 @@ public class MessageController {
                     if (!groupFinalMessages.isEmpty()) {
                         groupFinalMessages.entrySet().stream()
                                 .filter(entry -> player.hasPermission("messagenotifier.group." + entry.getKey()))
-                                .forEach(entry -> filteredMessages.add(entry.getValue()));
+                                .forEach(entry -> filteredMessages.add(PlaceholderUtil.replace(entry.getValue(), player)));
                     }
 
-                    filteredMessages.add(defaultMessage);
+                    filteredMessages.add(PlaceholderUtil.replace(defaultMessage, player));
 
                     String finalMessage = filteredMessages.get(random.nextInt(filteredMessages.size()));
 

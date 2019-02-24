@@ -3,6 +3,7 @@ package net.minecord.messagenotifier.controller;
 import net.minecord.messagenotifier.MessageNotifier;
 import net.minecord.messagenotifier.entity.WelcomeTitle;
 import net.minecord.messagenotifier.events.WelcomeTitleSendEvent;
+import net.minecord.messagenotifier.util.PlaceholderUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -75,7 +76,7 @@ public class TitleController {
     }
 
     private void sendTitle(Player player, WelcomeTitle welcomeTitle) {
-        player.sendTitle(ChatColor.translateAlternateColorCodes('&', welcomeTitle.getTitle()), ChatColor.translateAlternateColorCodes('&', welcomeTitle.getSubTitle()), welcomeTitle.getFadeIn(), welcomeTitle.getStay(), welcomeTitle.getFadeOut());
+        player.sendTitle(ChatColor.translateAlternateColorCodes('&', PlaceholderUtil.replace(welcomeTitle.getTitle(), player)), ChatColor.translateAlternateColorCodes('&', PlaceholderUtil.replace(welcomeTitle.getSubTitle(), player)), welcomeTitle.getFadeIn(), welcomeTitle.getStay(), welcomeTitle.getFadeOut());
     }
 
     public void onDisable() {
