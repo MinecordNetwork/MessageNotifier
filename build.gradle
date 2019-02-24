@@ -6,7 +6,7 @@ def spigotVersion = "1.13.2-R0.1-SNAPSHOT"
 def pluginName = "MessageNotifier"
 
 group 'net.minecord'
-version '1.4-SNAPSHOT'
+version '0.1-SNAPSHOT'
 
 sourceCompatibility = 1.8
 
