@@ -52,6 +52,7 @@ public class MessageNotifier extends JavaPlugin {
     @Override
     public void onDisable() {
         messageController.onDisable();
+        titleController.onDisable();
 
         Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', pluginPrefix + "&6Plugin successfully disabled!"));
     }

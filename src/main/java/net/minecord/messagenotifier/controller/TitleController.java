@@ -80,6 +80,6 @@ public class TitleController {
     }
 
     public void onDisable() {
-
+        titles.clear();
     }
 }
