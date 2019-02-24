@@ -40,7 +40,9 @@ public class TitleController {
             public void run() {
                 if (!sendAll) {
                     WelcomeTitle randomTitle = titles.get(random.nextInt(titles.size()));
+
                     WelcomeTitleSendEvent welcomeTitleSendEvent = new WelcomeTitleSendEvent(player, randomTitle);
+                    Bukkit.getPluginManager().callEvent(welcomeTitleSendEvent);
 
                     if (welcomeTitleSendEvent.isCancelled()) {
                         cancel();
