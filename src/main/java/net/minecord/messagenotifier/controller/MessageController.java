@@ -16,7 +16,7 @@ import java.util.*;
 public class MessageController {
 
     private MessageNotifier messageNotifier;
-    private List<String> defaultMessages;
+    private List<String> defaultMessages = new ArrayList<>();
     private HashMap<String, List<String>> groupMessages = new HashMap<>();
     private String messagePrefix;
     private Random random = new Random();
@@ -30,9 +30,6 @@ public class MessageController {
 
     public void onEnable(FileConfiguration config) {
         messagePrefix = config.getString("chat-messages.prefix");
-        defaultMessages = config.getStringList("chat-messages.groups.default");
-
-        Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', messageNotifier.getPluginPrefix() + "&7Default messages loaded: &a" + defaultMessages.size()));
 
         Set<String> groups = config.getConfigurationSection("chat-messages.groups").getKeys(false);
         groups.forEach(key -> {
@@ -40,9 +37,12 @@ public class MessageController {
                 List<String> messages = config.getStringList("chat-messages.groups." + key);
                 groupMessages.put(key, messages);
                 Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', messageNotifier.getPluginPrefix() + "&7Loaded group &b" + key + " &7with &a" + messages.size() + " &7messages"));
+            } else {
+                defaultMessages = config.getStringList("chat-messages.groups." + key);
             }
         });
 
+        Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', messageNotifier.getPluginPrefix() + "&7Default messages loaded: &a" + defaultMessages.size()));
         Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', messageNotifier.getPluginPrefix() + "&7Groups loaded: &a" + groupMessages.size()));
 
         sendChatMessage(config.getInt("chat-messages.delay"));
