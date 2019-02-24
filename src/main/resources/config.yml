@@ -2,6 +2,7 @@ welcome-titles:
   # Set to false if you want to send only 1 random title
   send-all: true
   titles:
+    # Allowed placeholders: {playerName}, {playerDisplayName}, {onlinePlayers}, {maxPlayers}
     -
       title: "&7&lWelcome to &a&lMinecord Network"
       sub-title: "&f&lWe hope you'll enjoy the game!"
@@ -18,6 +19,8 @@ chat-messages:
   # You can add your own groups, permission will be messagenotifier.group.<groupName>
   # Player will be always receiving messages from group default and all groups if he has permissions for it
   groups:
+    # Allowed placeholders: {playerName}, {playerDisplayName}, {onlinePlayers}, {maxPlayers}
+
     # No permission required
     default:
       - "{prefix} &7This is just a test &aDEFAULT &7message"
