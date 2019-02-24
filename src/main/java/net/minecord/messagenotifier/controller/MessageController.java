@@ -59,7 +59,11 @@ public class MessageController {
                     cancel();
                 }
 
-                String defaultMessage = defaultMessages.get(random.nextInt(defaultMessages.size()));
+                String defaultMessage = null;
+                if (!defaultMessages.isEmpty()) {
+                    defaultMessage = defaultMessages.get(random.nextInt(defaultMessages.size()));
+                }
+
                 HashMap<String, String> groupFinalMessages = new HashMap<>();
 
                 groupMessages.entrySet().stream()
@@ -75,7 +79,12 @@ public class MessageController {
                                 .forEach(entry -> filteredMessages.add(PlaceholderUtil.replace(entry.getValue(), player)));
                     }
 
-                    filteredMessages.add(PlaceholderUtil.replace(defaultMessage, player));
+                    if (defaultMessage != null)
+                        filteredMessages.add(PlaceholderUtil.replace(defaultMessage, player));
+
+                    if (filteredMessages.isEmpty()) {
+                        continue;
+                    }
 
                     String finalMessage = filteredMessages.get(random.nextInt(filteredMessages.size()));
 

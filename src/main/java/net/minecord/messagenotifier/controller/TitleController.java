@@ -39,7 +39,9 @@ public class TitleController {
     public void onJoin(Player player) {
         new BukkitRunnable() {
             public void run() {
-                if (!sendAll) {
+                if (titles.isEmpty()) {
+                    cancel();
+                } else if (!sendAll) {
                     WelcomeTitle randomTitle = titles.get(random.nextInt(titles.size()));
 
                     WelcomeTitleSendEvent welcomeTitleSendEvent = new WelcomeTitleSendEvent(player, randomTitle);
