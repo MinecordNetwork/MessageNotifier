@@ -96,5 +96,7 @@ public class MessageController {
 
     public void onDisable() {
         currentThread.cancel();
+        defaultMessages.clear();
+        groupMessages.clear();
     }
 }
