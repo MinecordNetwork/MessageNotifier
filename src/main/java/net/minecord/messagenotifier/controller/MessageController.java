@@ -33,14 +33,14 @@ public class MessageController {
 
         Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', messageNotifier.getPluginPrefix() + "&7Default messages loaded: &a" + defaultMessages.size()));
 
-        List<Map<?, ?>> groups = config.getMapList("chat-messages.groups");
-        groups.forEach((entry) -> entry.forEach((key, value) -> {
+        Set<String> groups = config.getConfigurationSection("chat-messages.groups").getKeys(false);
+        groups.forEach(key -> {
             if (!key.equals("default")) {
                 List<String> messages = config.getStringList("chat-messages.groups." + key);
-                groupMessages.put((String) key, messages);
+                groupMessages.put(key, messages);
                 Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', messageNotifier.getPluginPrefix() + "&7Loaded group &b" + key + " &7with &a" + messages.size() + " &7messages"));
             }
-        }));
+        });
 
         Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', messageNotifier.getPluginPrefix() + "&7Groups loaded: &a" + groupMessages.size()));
 
