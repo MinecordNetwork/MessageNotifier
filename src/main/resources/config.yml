@@ -4,12 +4,12 @@ welcome-titles:
   titles:
     # Allowed placeholders: {playerName}, {playerDisplayName}, {onlinePlayers}, {maxPlayers}
     -
-      title: "&7&lWelcome to &a&lMinecord Network"
-      sub-title: "&f&lWe hope you'll enjoy the game!"
+      title: "&e&lMinecord Network"
+      sub-title: "&f&lWe hope you'll enjoy the game"
       stay: 5
     -
-      title: "&e&lThis is a title"
-      sub-title: "&a&lAnd this is subtitle (surprise!)"
+      title: "&b&lExample title"
+      sub-title: "&7&lThis is just a sub-title"
       stay: 3
 
 chat-messages:

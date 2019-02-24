@@ -25,7 +25,7 @@ public class MessageNotifier extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        saveDefaultConfig();
+        saveResource("config.yml", false);
 
         messageController = new MessageController(this);
         titleController = new TitleController(this);
@@ -39,7 +39,6 @@ public class MessageNotifier extends JavaPlugin {
     }
 
     public void onReload() {
-        saveDefaultConfig();
         reloadConfig();
 
         messageController.onDisable();
