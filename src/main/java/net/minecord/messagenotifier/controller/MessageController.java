@@ -17,6 +17,7 @@ public class MessageController {
     private MessageNotifier messageNotifier;
     private List<String> defaultMessages;
     private HashMap<String, List<String>> groupMessages = new HashMap<>();
+    private int groupsLoaded;
     private String messagePrefix;
     private Random random = new Random();
     private BukkitTask currentThread;
@@ -33,8 +34,12 @@ public class MessageController {
 
         List<Map<?, ?>> groups = config.getMapList("chat-messages.groups");
         groups.forEach((entry) -> entry.forEach((key, value) -> {
-            groupMessages.put((String) key, config.getStringList("chat-messages.groups." + key));
+            if (!key.equals("default")) {
+                groupMessages.put((String) key, config.getStringList("chat-messages.groups." + key));
+            }
         }));
+
+        groupsLoaded = groupMessages.size();
 
         sendChatMessage(config.getInt("chat-messages.delay"));
     }
@@ -42,17 +47,35 @@ public class MessageController {
     private void sendChatMessage(int delay) {
         currentThread = new BukkitRunnable() {
             public void run() {
-                String defaultMessage = defaultMessages.get(random.nextInt(defaultMessages.size()));
-
                 NotifyScheduleEvent scheduleEvent = new NotifyScheduleEvent(delay);
                 Bukkit.getPluginManager().callEvent(scheduleEvent);
 
                 if (scheduleEvent.isCancelled()) {
                     sendChatMessage(scheduleEvent.getNextNotifyIn());
+                    return;
                 }
 
+                String defaultMessage = defaultMessages.get(random.nextInt(defaultMessages.size()));
+                HashMap<String, String> groupFinalMessages = new HashMap<>();
+
+                groupMessages.entrySet().stream()
+                        .filter(entry -> !entry.getValue().isEmpty())
+                        .forEach(entry -> groupFinalMessages.put(entry.getKey(), entry.getValue().get(random.nextInt(entry.getValue().size()))));
+
                 for (Player player : Bukkit.getOnlinePlayers()) {
-                    PlayerNotifyEvent playerNotifyEvent = new PlayerNotifyEvent(player, defaultMessage, messagePrefix);
+                    List<String> filteredMessages = new ArrayList<>();
+
+                    if (!groupFinalMessages.isEmpty()) {
+                        groupFinalMessages.entrySet().stream()
+                                .filter(entry -> player.hasPermission("messagenotifier.group." + entry.getKey()))
+                                .forEach(entry -> filteredMessages.add(entry.getValue()));
+                    }
+
+                    filteredMessages.add(defaultMessage);
+
+                    String finalMessage = filteredMessages.get(random.nextInt(filteredMessages.size()));
+
+                    PlayerNotifyEvent playerNotifyEvent = new PlayerNotifyEvent(player, finalMessage, messagePrefix);
                     Bukkit.getPluginManager().callEvent(playerNotifyEvent);
 
                     if (playerNotifyEvent.isCancelled()) {

@@ -24,6 +24,8 @@ public class MessageNotifier extends JavaPlugin {
 
     @Override
     public void onEnable() {
+        saveDefaultConfig();
+
         messageController = new MessageController(this);
         titleController = new TitleController(this);
 
