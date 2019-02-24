@@ -52,7 +52,7 @@ public class MessageController {
 
                 if (scheduleEvent.isCancelled()) {
                     sendChatMessage(scheduleEvent.getNextNotifyIn());
-                    return;
+                    cancel();
                 }
 
                 String defaultMessage = defaultMessages.get(random.nextInt(defaultMessages.size()));
