@@ -2,7 +2,7 @@ package net.minecord.messagenotifier.controller;
 
 import net.minecord.messagenotifier.MessageNotifier;
 import net.minecord.messagenotifier.events.NotifyScheduleEvent;
-import net.minecord.messagenotifier.events.PlayerNotifyEvent;
+import net.minecord.messagenotifier.events.ChatMessageSendEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -78,7 +78,7 @@ public class MessageController {
 
                     String finalMessage = filteredMessages.get(random.nextInt(filteredMessages.size()));
 
-                    PlayerNotifyEvent playerNotifyEvent = new PlayerNotifyEvent(player, finalMessage, messagePrefix);
+                    ChatMessageSendEvent playerNotifyEvent = new ChatMessageSendEvent(player, finalMessage, messagePrefix);
                     Bukkit.getPluginManager().callEvent(playerNotifyEvent);
 
                     if (playerNotifyEvent.isCancelled()) {
