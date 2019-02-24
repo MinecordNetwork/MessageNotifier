@@ -1,7 +1,7 @@
 package net.minecord.messagenotifier.controller;
 
 import net.minecord.messagenotifier.MessageNotifier;
-import net.minecord.messagenotifier.events.NotifyScheduleEvent;
+import net.minecord.messagenotifier.events.ChatMessageScheduleEvent;
 import net.minecord.messagenotifier.events.ChatMessageSendEvent;
 import net.minecord.messagenotifier.util.PlaceholderUtil;
 import org.bukkit.Bukkit;
@@ -51,7 +51,7 @@ public class MessageController {
     private void sendChatMessage(int delay) {
         currentThread = new BukkitRunnable() {
             public void run() {
-                NotifyScheduleEvent scheduleEvent = new NotifyScheduleEvent(delay);
+                ChatMessageScheduleEvent scheduleEvent = new ChatMessageScheduleEvent(delay);
                 Bukkit.getPluginManager().callEvent(scheduleEvent);
 
                 if (scheduleEvent.isCancelled()) {

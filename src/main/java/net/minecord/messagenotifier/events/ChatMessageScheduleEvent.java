@@ -4,13 +4,13 @@ import org.bukkit.event.Cancellable;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 
-public class NotifyScheduleEvent extends Event implements Cancellable {
+public class ChatMessageScheduleEvent extends Event implements Cancellable {
 
     private static final HandlerList handlerList = new HandlerList();
     private boolean isCancelled = false;
     private int nextNotifyIn;
 
-    public NotifyScheduleEvent(int nextNotifyIn) {
+    public ChatMessageScheduleEvent(int nextNotifyIn) {
         this.nextNotifyIn = nextNotifyIn;
     }
 
