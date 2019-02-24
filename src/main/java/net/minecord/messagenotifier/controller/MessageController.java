@@ -17,7 +17,6 @@ public class MessageController {
     private MessageNotifier messageNotifier;
     private List<String> defaultMessages;
     private HashMap<String, List<String>> groupMessages = new HashMap<>();
-    private int groupsLoaded;
     private String messagePrefix;
     private Random random = new Random();
     private BukkitTask currentThread;
@@ -38,8 +37,6 @@ public class MessageController {
                 groupMessages.put((String) key, config.getStringList("chat-messages.groups." + key));
             }
         }));
-
-        groupsLoaded = groupMessages.size();
 
         sendChatMessage(config.getInt("chat-messages.delay"));
     }
