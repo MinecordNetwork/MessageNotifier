@@ -39,7 +39,7 @@ public class TitleController {
     public void onJoin(Player player) {
         new BukkitRunnable() {
             public void run() {
-                if (titles.isEmpty()) {
+                if (titles.isEmpty() || player.hasPermission("messagenotifier.ignore.titles")) {
                     cancel();
                 } else if (!sendAll) {
                     WelcomeTitle randomTitle = titles.get(random.nextInt(titles.size()));

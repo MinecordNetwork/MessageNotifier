@@ -4,7 +4,9 @@ Plugin for scheduling automessages and sending join title messages (Spigot/Paper
 
 #### Permissions
  - messagenotifier.reload
- - messagenotifier.ignore
+ - messagenotifier.group.<groupName>
+ - messagenotifier.ignore.messages
+ - messagenotifier.ignore.titles
  
 #### Commands
   - /messagenotifier reload

@@ -71,6 +71,10 @@ public class MessageController {
                         .forEach(entry -> groupFinalMessages.put(entry.getKey(), entry.getValue().get(random.nextInt(entry.getValue().size()))));
 
                 for (Player player : Bukkit.getOnlinePlayers()) {
+                    if (player.hasPermission("messagenotifier.ignore.messages")) {
+                        continue;
+                    }
+
                     List<String> filteredMessages = new ArrayList<>();
 
                     if (!groupFinalMessages.isEmpty()) {
