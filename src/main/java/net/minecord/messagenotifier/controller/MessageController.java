@@ -1,6 +1,7 @@
 package net.minecord.messagenotifier.controller;
 
 import net.minecord.messagenotifier.MessageNotifier;
+import net.minecord.messagenotifier.entity.ChatMessage;
 import net.minecord.messagenotifier.events.ChatMessageScheduleEvent;
 import net.minecord.messagenotifier.events.ChatMessageSendEvent;
 import net.minecord.messagenotifier.util.PlaceholderUtil;
@@ -75,22 +76,22 @@ public class MessageController {
                         continue;
                     }
 
-                    List<String> filteredMessages = new ArrayList<>();
+                    List<ChatMessage> filteredMessages = new ArrayList<>();
 
                     if (!groupFinalMessages.isEmpty()) {
                         groupFinalMessages.entrySet().stream()
                                 .filter(entry -> player.hasPermission("messagenotifier.group." + entry.getKey()))
-                                .forEach(entry -> filteredMessages.add(PlaceholderUtil.replace(entry.getValue(), player)));
+                                .forEach(entry -> filteredMessages.add(new ChatMessage(PlaceholderUtil.replace(entry.getValue(), player), entry.getKey())));
                     }
 
                     if (defaultMessage != null)
-                        filteredMessages.add(PlaceholderUtil.replace(defaultMessage, player));
+                        filteredMessages.add(new ChatMessage(PlaceholderUtil.replace(defaultMessage, player)));
 
                     if (filteredMessages.isEmpty()) {
                         continue;
                     }
 
-                    String finalMessage = filteredMessages.get(random.nextInt(filteredMessages.size()));
+                    ChatMessage finalMessage = filteredMessages.get(random.nextInt(filteredMessages.size()));
 
                     ChatMessageSendEvent playerNotifyEvent = new ChatMessageSendEvent(player, finalMessage, messagePrefix);
                     Bukkit.getPluginManager().callEvent(playerNotifyEvent);
@@ -99,7 +100,7 @@ public class MessageController {
                         continue;
                     }
 
-                    player.sendMessage(ChatColor.translateAlternateColorCodes('&', playerNotifyEvent.getMessage().replace("{prefix}", playerNotifyEvent.getPrefix())));
+                    player.sendMessage(ChatColor.translateAlternateColorCodes('&', playerNotifyEvent.getMessage().toString().replace("{prefix}", playerNotifyEvent.getPrefix())));
                 }
 
                 sendChatMessage(scheduleEvent.getNextNotifyIn());

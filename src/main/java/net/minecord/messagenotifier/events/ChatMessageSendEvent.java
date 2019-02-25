@@ -1,5 +1,6 @@
 package net.minecord.messagenotifier.events;
 
+import net.minecord.messagenotifier.entity.ChatMessage;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Cancellable;
 import org.bukkit.event.Event;
@@ -10,10 +11,10 @@ public class ChatMessageSendEvent extends Event implements Cancellable {
     private static final HandlerList handlerList = new HandlerList();
     private boolean isCancelled = false;
     private Player receiver;
-    private String message;
+    private ChatMessage message;
     private String prefix;
 
-    public ChatMessageSendEvent(Player receiver, String message, String prefix) {
+    public ChatMessageSendEvent(Player receiver, ChatMessage message, String prefix) {
         this.receiver = receiver;
         this.message = message;
         this.prefix = prefix;
@@ -27,11 +28,11 @@ public class ChatMessageSendEvent extends Event implements Cancellable {
         this.receiver = receiver;
     }
 
-    public String getMessage() {
+    public ChatMessage getMessage() {
         return message;
     }
 
-    public void setMessage(String message) {
+    public void setMessage(ChatMessage message) {
         this.message = message;
     }
 
