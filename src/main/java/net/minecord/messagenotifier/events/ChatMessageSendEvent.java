@@ -12,12 +12,10 @@ public class ChatMessageSendEvent extends Event implements Cancellable {
     private boolean isCancelled = false;
     private Player receiver;
     private ChatMessage message;
-    private String prefix;
 
-    public ChatMessageSendEvent(Player receiver, ChatMessage message, String prefix) {
+    public ChatMessageSendEvent(Player receiver, ChatMessage message) {
         this.receiver = receiver;
         this.message = message;
-        this.prefix = prefix;
     }
 
     public Player getReceiver() {
@@ -34,14 +32,6 @@ public class ChatMessageSendEvent extends Event implements Cancellable {
 
     public void setMessage(ChatMessage message) {
         this.message = message;
-    }
-
-    public String getPrefix() {
-        return prefix;
-    }
-
-    public void setPrefix(String prefix) {
-        this.prefix = prefix;
     }
 
     @Override

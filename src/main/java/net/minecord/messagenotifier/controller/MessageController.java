@@ -81,11 +81,11 @@ public class MessageController {
                     if (!groupFinalMessages.isEmpty()) {
                         groupFinalMessages.entrySet().stream()
                                 .filter(entry -> player.hasPermission("messagenotifier.group." + entry.getKey()))
-                                .forEach(entry -> filteredMessages.add(new ChatMessage(PlaceholderUtil.replace(entry.getValue(), player), entry.getKey())));
+                                .forEach(entry -> filteredMessages.add(new ChatMessage(PlaceholderUtil.replace(entry.getValue(), player), messagePrefix, entry.getKey())));
                     }
 
                     if (defaultMessage != null)
-                        filteredMessages.add(new ChatMessage(PlaceholderUtil.replace(defaultMessage, player)));
+                        filteredMessages.add(new ChatMessage(PlaceholderUtil.replace(defaultMessage, player), messagePrefix));
 
                     if (filteredMessages.isEmpty()) {
                         continue;
@@ -93,14 +93,14 @@ public class MessageController {
 
                     ChatMessage finalMessage = filteredMessages.get(random.nextInt(filteredMessages.size()));
 
-                    ChatMessageSendEvent playerNotifyEvent = new ChatMessageSendEvent(player, finalMessage, messagePrefix);
+                    ChatMessageSendEvent playerNotifyEvent = new ChatMessageSendEvent(player, finalMessage);
                     Bukkit.getPluginManager().callEvent(playerNotifyEvent);
 
                     if (playerNotifyEvent.isCancelled()) {
                         continue;
                     }
 
-                    player.sendMessage(ChatColor.translateAlternateColorCodes('&', playerNotifyEvent.getMessage().toString().replace("{prefix}", playerNotifyEvent.getPrefix())));
+                    player.sendMessage(ChatColor.translateAlternateColorCodes('&', playerNotifyEvent.getMessage().toString()));
                 }
 
                 sendChatMessage(scheduleEvent.getNextNotifyIn());
