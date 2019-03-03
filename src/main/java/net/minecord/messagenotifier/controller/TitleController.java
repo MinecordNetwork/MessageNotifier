@@ -78,7 +78,7 @@ public class TitleController {
             return;
         }
 
-        welcomeTitle =welcomeTitleSendEvent.getWelcomeTitle();
+        welcomeTitle = welcomeTitleSendEvent.getWelcomeTitle();
 
         player.sendTitle(ChatColor.translateAlternateColorCodes('&', PlaceholderUtil.replace(welcomeTitle.getTitle(), player)), ChatColor.translateAlternateColorCodes('&', PlaceholderUtil.replace(welcomeTitle.getSubTitle(), player)), welcomeTitle.getFadeIn(), welcomeTitle.getStay(), welcomeTitle.getFadeOut());
     }
