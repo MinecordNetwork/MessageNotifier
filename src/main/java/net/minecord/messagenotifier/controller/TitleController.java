@@ -44,13 +44,6 @@ public class TitleController {
                 } else if (!sendAll) {
                     WelcomeTitle randomTitle = titles.get(random.nextInt(titles.size()));
 
-                    WelcomeTitleSendEvent welcomeTitleSendEvent = new WelcomeTitleSendEvent(player, randomTitle);
-                    Bukkit.getPluginManager().callEvent(welcomeTitleSendEvent);
-
-                    if (welcomeTitleSendEvent.isCancelled()) {
-                        cancel();
-                    }
-
                     sendTitle(player, randomTitle);
 
                 } else {
@@ -78,6 +71,15 @@ public class TitleController {
     }
 
     private void sendTitle(Player player, WelcomeTitle welcomeTitle) {
+        WelcomeTitleSendEvent welcomeTitleSendEvent = new WelcomeTitleSendEvent(player, welcomeTitle);
+        Bukkit.getPluginManager().callEvent(welcomeTitleSendEvent);
+
+        if (welcomeTitleSendEvent.isCancelled()) {
+            return;
+        }
+
+        welcomeTitle =welcomeTitleSendEvent.getWelcomeTitle();
+
         player.sendTitle(ChatColor.translateAlternateColorCodes('&', PlaceholderUtil.replace(welcomeTitle.getTitle(), player)), ChatColor.translateAlternateColorCodes('&', PlaceholderUtil.replace(welcomeTitle.getSubTitle(), player)), welcomeTitle.getFadeIn(), welcomeTitle.getStay(), welcomeTitle.getFadeOut());
     }
 
