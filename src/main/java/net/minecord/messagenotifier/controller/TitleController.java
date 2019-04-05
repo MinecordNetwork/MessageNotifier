@@ -41,6 +41,7 @@ public class TitleController {
             public void run() {
                 if (titles.isEmpty() || (player.hasPermission("messagenotifier.ignore.titles") && !player.hasPermission("messagenotifier.*"))) {
                     cancel();
+
                 } else if (!sendAll) {
                     WelcomeTitle randomTitle = titles.get(random.nextInt(titles.size()));
 
