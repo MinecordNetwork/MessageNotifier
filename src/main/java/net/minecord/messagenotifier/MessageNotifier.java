@@ -13,7 +13,7 @@ import org.bukkit.plugin.java.annotation.plugin.Description;
 import org.bukkit.plugin.java.annotation.plugin.Plugin;
 import org.bukkit.plugin.java.annotation.plugin.Website;
 
-@Plugin(name = "MessageNotifier", version = "0.1")
+@Plugin(name = "MessageNotifier", version = "0.2")
 @Description("Minecraft (Spigot/Bukkit) plugin for sending auto messages and join titles")
 @Commands(@Command(name = "messagenotifier", desc = "Help command"))
 @Website("https://minecord.net")
