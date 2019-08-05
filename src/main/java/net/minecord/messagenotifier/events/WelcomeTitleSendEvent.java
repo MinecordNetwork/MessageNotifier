@@ -14,6 +14,7 @@ public class WelcomeTitleSendEvent extends Event implements Cancellable {
     private WelcomeTitle welcomeTitle;
 
     public WelcomeTitleSendEvent(Player receiver, WelcomeTitle welcomeTitle) {
+        super(true);
         this.receiver = receiver;
         this.welcomeTitle = welcomeTitle;
     }

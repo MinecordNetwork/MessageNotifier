@@ -14,6 +14,7 @@ public class ChatMessageSendEvent extends Event implements Cancellable {
     private ChatMessage message;
 
     public ChatMessageSendEvent(Player receiver, ChatMessage message) {
+        super(true);
         this.receiver = receiver;
         this.message = message;
     }

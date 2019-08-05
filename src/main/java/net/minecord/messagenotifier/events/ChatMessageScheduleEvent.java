@@ -11,6 +11,7 @@ public class ChatMessageScheduleEvent extends Event implements Cancellable {
     private int nextNotifyIn;
 
     public ChatMessageScheduleEvent(int nextNotifyIn) {
+        super(true);
         this.nextNotifyIn = nextNotifyIn;
     }
 
